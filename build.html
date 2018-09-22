@@ -20,7 +20,7 @@
 
 <meta name="description" content="sysiphos-root">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Sysiphos</title>
+<title>Build · Sysiphos</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
@@ -56,7 +56,12 @@ data-md-color-accent="cyan"
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
 Sysiphos
+</span>
+<span class="md-header-nav__topic">
+Build
+</span>
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -139,7 +144,7 @@ flowtick/sysiphos
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
   <li><a href="configuration.html" class="page">Configuration</a></li>
-  <li><a href="build.html" class="page">Build</a></li>
+  <li><a href="build.html" class="active page">Build</a></li>
   <li><a href="screenshots.html" class="page">Screenshots</a></li>
   <li><a href="acknowledgments.html" class="page">Acknowledgments</a></li>
   <li><a href="license.html" class="page">License</a></li>
@@ -147,9 +152,11 @@ flowtick/sysiphos
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#sysiphos" class="header">Sysiphos</a>
+  <li><a href="build.html#build" class="header">Build</a>
   <ul>
-    <li><a href="index.html#why-" class="header">Why?</a></li>
+    <li><a href="build.html#packaging" class="header">Packaging</a></li>
+    <li><a href="build.html#publishing" class="header">Publishing</a></li>
+    <li><a href="build.html#documentation" class="header">Documentation</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -171,9 +178,11 @@ flowtick/sysiphos
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#sysiphos" class="header">Sysiphos</a>
+  <li><a href="build.html#build" class="header">Build</a>
   <ul>
-    <li><a href="index.html#why-" class="header">Why?</a></li>
+    <li><a href="build.html#packaging" class="header">Packaging</a></li>
+    <li><a href="build.html#publishing" class="header">Publishing</a></li>
+    <li><a href="build.html#documentation" class="header">Documentation</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -184,23 +193,49 @@ flowtick/sysiphos
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#sysiphos" name="sysiphos" class="anchor"><span class="anchor-link"></span></a>Sysiphos</h1>
-<p><code>Sysiphos</code> is a graph-based task scheduler.</p>
-<h1><a href="#why-" name="why-" class="anchor"><span class="anchor-link"></span></a>Why?</h1>
-<p>After looking at projects like <a href="https://airflow.incubator.apache.org">Airflow</a>, <a href="https://mesos.github.io/chronos">Chronos</a> or <a href="https://oozie.apache.org/">Oozie</a> there seems to be a place for a solution that is </p>
-<ul>
-  <li>providing a rich language agnostic scheduler DSL</li>
-  <li>independent of a (technical) domain or focus area like Hadoop</li>
-  <li>not reinventing the wheel</li>
-  <li>usable with minimal dependencies</li>
-  <li>JVM-based</li>
-  <li>developed with an <em>API first</em> UI approach</li>
-</ul>
-<p>Sysiphos wants to be that solution.</p>
-<p>That being that, Sysiphos is heavily influenced by the usage of the above mentioned tools and tries to pick the best features of each. Its currently not a feature-rich as any of those solutions and provides basic scheduling.</p>
+<h2><a href="#build" name="build" class="anchor"><span class="anchor-link"></span></a>Build</h2>
+<p>Sysiphos uses <a href="https://www.scala-sbt.org">sbt</a> as build tool. It is assumed that you have installed.</p>
+<p>The core libs should also work for older Scala versions, so remember to verify / run everything with the cross build prefix:</p>
+<pre class="prettyprint"><code class="language-bash">sbt +compile
+sbt +test
+</code></pre>
+<h2><a href="#packaging" name="packaging" class="anchor"><span class="anchor-link"></span></a>Packaging</h2>
+<p>Sysiphos uses <a href="https://github.com/sbt/sbt-native-packager">sbt-native-packager</a>, this allows to create multiple formats, see the documentation for details.</p>
+<p>Examples:</p>
+<pre class="prettyprint"><code class="language-bash"># creates a deb file
+sbt debian:packageBin 
+
+# create a zip package with start scripts
+sbt universal:packageBin 
+
+# create a tar.gz package with start scripts
+sbt universal:packageZipTarball 
+
+# create a local docker image
+sbt docker:publishLocal 
+</code></pre>
+<p>Build packages can be found in <code>server/jvm/target[/universal]</code></p>
+<h2><a href="#publishing" name="publishing" class="anchor"><span class="anchor-link"></span></a>Publishing</h2>
+<p>First build the docker image:</p>
+<pre class="prettyprint"><code class="language-bash">sbt docker:publishLocal
+</code></pre>
+<p>This will create a <code>latest</code> tag and one for the current build version.</p>
+<p>Then login and push it:</p>
+<pre class="prettyprint"><code class="language-bash">docker login 
+# enter your credentials
+docker push flowtick/sysiphos:latest
+</code></pre>
+<h2><a href="#documentation" name="documentation" class="anchor"><span class="anchor-link"></span></a>Documentation</h2>
+<p>Generate the site:</p>
+<pre class="prettyprint"><code class="language-bash">sbt makeSite
+</code></pre>
+<p>and check the result in <code>target/site</code>.</p>
+<p>If it looks good and you have the permissions, you can push it to the GitHub Pages via:</p>
+<pre class="prettyprint"><code class="language-bash">sbt ghpagesPushSite
+</code></pre>
 </div>
 <div>
-<a href="https://github.com/flowtick/sysiphos/tree/master/docs/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/flowtick/sysiphos/tree/master/docs/build.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -216,13 +251,26 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="intro.html" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="configuration.html" title="Configuration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Configuration
+</span>
+</div>
+</a>
+<a href="screenshots.html" title="Screenshots" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Introduction
+Screenshots
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">

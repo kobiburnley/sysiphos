@@ -20,7 +20,7 @@
 
 <meta name="description" content="sysiphos-root">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Sysiphos</title>
+<title>Configuration · Sysiphos</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
@@ -56,7 +56,12 @@ data-md-color-accent="cyan"
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
 Sysiphos
+</span>
+<span class="md-header-nav__topic">
+Configuration
+</span>
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -138,20 +143,13 @@ flowtick/sysiphos
   <li><a href="run.html" class="page">Run</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
-  <li><a href="configuration.html" class="page">Configuration</a></li>
+  <li><a href="configuration.html" class="active page">Configuration</a></li>
   <li><a href="build.html" class="page">Build</a></li>
   <li><a href="screenshots.html" class="page">Screenshots</a></li>
   <li><a href="acknowledgments.html" class="page">Acknowledgments</a></li>
   <li><a href="license.html" class="page">License</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">Table of contents</label>
-<ul>
-  <li><a href="index.html#sysiphos" class="header">Sysiphos</a>
-  <ul>
-    <li><a href="index.html#why-" class="header">Why?</a></li>
-  </ul></li>
-</ul>
 </nav>
 
 </nav>
@@ -165,42 +163,77 @@ flowtick/sysiphos
 </div>
 </div>
 </div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">Table of contents</label>
-<ul>
-  <li><a href="index.html#sysiphos" class="header">Sysiphos</a>
-  <ul>
-    <li><a href="index.html#why-" class="header">Why?</a></li>
-  </ul></li>
-</ul>
-</nav>
-
-</div>
-</div>
-</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#sysiphos" name="sysiphos" class="anchor"><span class="anchor-link"></span></a>Sysiphos</h1>
-<p><code>Sysiphos</code> is a graph-based task scheduler.</p>
-<h1><a href="#why-" name="why-" class="anchor"><span class="anchor-link"></span></a>Why?</h1>
-<p>After looking at projects like <a href="https://airflow.incubator.apache.org">Airflow</a>, <a href="https://mesos.github.io/chronos">Chronos</a> or <a href="https://oozie.apache.org/">Oozie</a> there seems to be a place for a solution that is </p>
-<ul>
-  <li>providing a rich language agnostic scheduler DSL</li>
-  <li>independent of a (technical) domain or focus area like Hadoop</li>
-  <li>not reinventing the wheel</li>
-  <li>usable with minimal dependencies</li>
-  <li>JVM-based</li>
-  <li>developed with an <em>API first</em> UI approach</li>
-</ul>
-<p>Sysiphos wants to be that solution.</p>
-<p>That being that, Sysiphos is heavily influenced by the usage of the above mentioned tools and tries to pick the best features of each. Its currently not a feature-rich as any of those solutions and provides basic scheduling.</p>
+<h2><a href="#configuration" name="configuration" class="anchor"><span class="anchor-link"></span></a>Configuration</h2>
+<p>Sysiphos allows configuration via Java system properties or environment variables.</p>
+<p>The corresponding environment variable for a property is created by making it upper case with all <code>.</code> characters replaced by <code>_</code>.</p>
+<p>So <code>a.property.key</code> becomes <code>A_PROPERTY_KEY</code>. Sysiphos will first look for the property value, then for the corresponding environment variable and then fallback to default if possible.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Property </th>
+      <th align="center">Default </th>
+      <th align="right">Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>database.url </td>
+      <td align="center">jdbc:h2:mem:sysiphos;DB_CLOSE_DELAY=-1 </td>
+      <td align="right">The JDBC URL to use </td>
+    </tr>
+    <tr>
+      <td>database.user </td>
+      <td align="center">sa </td>
+      <td align="right">The JDBC user to use </td>
+    </tr>
+    <tr>
+      <td>database.password </td>
+      <td align="center">empty string </td>
+      <td align="right">The JDBC password to use </td>
+    </tr>
+    <tr>
+      <td>database.profile </td>
+      <td align="center">h2 </td>
+      <td align="right">The database type, currently one of <em>(h2, mysql)</em> </td>
+    </tr>
+    <tr>
+      <td>logger.impl </td>
+      <td align="center">file </td>
+      <td align="right">The logger implementation, currently one of <em>(file, console)</em>, console will use stdout </td>
+    </tr>
+    <tr>
+      <td>logger.file.baseDir </td>
+      <td align="center">/tmp (the value of <code>java.io.tmpdir</code>) </td>
+      <td align="right">The base directory to use for logging </td>
+    </tr>
+    <tr>
+      <td>http.bind.address </td>
+      <td align="center">0.0.0.0 </td>
+      <td align="right">Address to use to bind the http server </td>
+    </tr>
+    <tr>
+      <td>http.port </td>
+      <td align="center">8080 </td>
+      <td align="right">Port to use to bind the http server </td>
+    </tr>
+    <tr>
+      <td>instance.threads </td>
+      <td align="center">10 </td>
+      <td align="right">number of threads to use for database access during instance execution </td>
+    </tr>
+    <tr>
+      <td>api.threads </td>
+      <td align="center">10 </td>
+      <td align="right">number of threads to use for api request handling </td>
+    </tr>
+  </tbody>
+</table>
 </div>
 <div>
-<a href="https://github.com/flowtick/sysiphos/tree/master/docs/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/flowtick/sysiphos/tree/master/docs/configuration.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -216,13 +249,26 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="intro.html" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="tasks.html" title="Tasks" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Tasks
+</span>
+</div>
+</a>
+<a href="build.html" title="Build" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Introduction
+Build
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">

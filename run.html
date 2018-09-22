@@ -34,6 +34,7 @@ code,kbd,pre{font-family:"Source Sans Pro","Courier New",Courier,monospace}
 <link rel="stylesheet" href="assets/fonts/font-awesome.css">
 <link rel="stylesheet" href="assets/fonts/material-icons.css">
 <link rel="stylesheet" href="assets/stylesheets/paradox-material-theme.css">
+<link rel="stylesheet" href="assets/custom.css">
 </head>
 <body
 data-md-color-primary="white"
@@ -47,7 +48,7 @@ data-md-color-accent="cyan"
 <div class="md-flex">
 <div class="md-flex__cell md-flex__cell--shrink">
 <a href="index.html" title="Sysiphos" class="md-header-nav__button md-logo">
-<i class="md-icon">timer</i>
+<img src="assets/logo.png" width="24" height="24">
 </a>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -117,7 +118,7 @@ flowtick/sysiphos
 <label class="md-nav__title md-nav__title--site" for="drawer">
 <a href="index.html" title="Sysiphos" class="md-nav__button md-logo">
 <span class="md-nav__button md-logo">
-<i class="md-icon">timer</i>
+<img src="assets/logo.png" width="24" height="24">
 </a>
 <a href="index.html" title="Sysiphos">
 Sysiphos
@@ -138,9 +139,25 @@ flowtick/sysiphos
 
 </div>
 <ul>
+  <li><a href="intro.html" class="page">Introduction</a></li>
   <li><a href="run.html" class="active page">Run</a></li>
+  <li><a href="tutorial.html" class="page">Tutorial</a></li>
+  <li><a href="tasks.html" class="page">Tasks</a></li>
+  <li><a href="configuration.html" class="page">Configuration</a></li>
+  <li><a href="build.html" class="page">Build</a></li>
+  <li><a href="screenshots.html" class="page">Screenshots</a></li>
+  <li><a href="acknowledgments.html" class="page">Acknowledgments</a></li>
+  <li><a href="license.html" class="page">License</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="run.html#run" class="header">Run</a>
+  <ul>
+    <li><a href="run.html#docker" class="header">Docker</a></li>
+    <li><a href="run.html#from-source" class="header">From Source</a></li>
+  </ul></li>
+</ul>
 </nav>
 
 </nav>
@@ -154,13 +171,68 @@ flowtick/sysiphos
 </div>
 </div>
 </div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="run.html#run" class="header">Run</a>
+  <ul>
+    <li><a href="run.html#docker" class="header">Docker</a></li>
+    <li><a href="run.html#from-source" class="header">From Source</a></li>
+  </ul></li>
+</ul>
+</nav>
+
+</div>
+</div>
+</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
 <h1><a href="#run" name="run" class="anchor"><span class="anchor-link"></span></a>Run</h1>
-<p>You can either run from source using <code>sbt serverJVM/run</code> or use the provided <a href="https://hub.docker.com/r/flowtick/sysiphos">docker image</a>:</p>
-<pre class="prettyprint"><code class="language-bash">docker run flowtick/sysiphos:latest
+<h3><a href="#docker" name="docker" class="anchor"><span class="anchor-link"></span></a>Docker</h3>
+<p>A <a href="https://hub.docker.com/r/flowtick/sysiphos">docker image</a> is provided, so you can just run it.</p>
+<pre class="prettyprint"><code class="language-bash">docker run -p 9090:8080 flowtick/sysiphos:latest
 </code></pre>
+<p>Will run Sysiphos with an in-memory database, that will accessible in the browser at <code>http://localhost:9090</code>.</p>
+<p>See also the <code>docker-compose</code> example, which is using MySQL:</p>
+<pre class="prettyprint"><code class="language-yml">version: &#39;3.1&#39;
+
+services:
+
+  db:
+    image: mysql:5.5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: sysiphos
+
+  # to have a look at the tables etc.
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+    - 9091:8080
+
+  sysiphos:
+    image: flowtick/sysiphos:latest
+    links:
+      - db
+    ports:
+      - 9090:8080
+    environment:
+      DATABASE_PROFILE: mysql
+      DATABASE_URL: jdbc:mysql://db:3306/sysiphos
+      DATABASE_USER: root
+      DATABASE_PASSWORD: example
+</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docker-compose-dev.yml">Full source at GitHub</a>
+<h3><a href="#from-source" name="from-source" class="anchor"><span class="anchor-link"></span></a>From Source</h3>
+<p>The server can also be run directly in the source directory via <code>sbt</code></p>
+<pre class="prettyprint"><code class="language-bash">sbt serverJVM/run -Dprop=value
+</code></pre>
+<p>In the example a system property with key <code>prop</code> is passed in.</p>
 </div>
 <div>
 <a href="https://github.com/flowtick/sysiphos/tree/master/docs/run.md" title="Edit this page" class="md-source-file md-edit">
@@ -179,7 +251,7 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="index.html" title="Sysiphos" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<a href="intro.html" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -188,8 +260,21 @@ Edit this page
 <span class="md-footer-nav__direction">
 Previous
 </span>
-Sysiphos
+Introduction
 </span>
+</div>
+</a>
+<a href="tutorial.html" title="Tutorial" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Next
+</span>
+Tutorial
+</span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
 </div>
 </a>
 </nav>
