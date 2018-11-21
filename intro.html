@@ -140,6 +140,7 @@ flowtick/sysiphos
 </div>
 <ul>
   <li><a href="intro.html" class="active page">Introduction</a></li>
+  <li><a href="execution-model.html" class="page">Execution Model</a></li>
   <li><a href="run.html" class="page">Run</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
@@ -170,7 +171,7 @@ flowtick/sysiphos
 <p>In Sysiphos workflows are defined with by a JSON object:</p>
 <pre class="prettyprint"><code class="language-json">{
   &quot;id&quot; : &quot;new-flow&quot;,
-  &quot;task&quot; : {
+  &quot;tasks&quot; : [{
     &quot;id&quot; : &quot;new-task&quot;,
     &quot;type&quot; : &quot;shell&quot;,
     &quot;command&quot; : &quot;curl https://api.chucknorris.io/jokes/random?category=${category!\&quot;dev\&quot;}&quot;,
@@ -181,15 +182,17 @@ flowtick/sysiphos
         &quot;command&quot; : &quot;echo I am child task, I get triggered when my parent is done. &quot;
       }
     ]
-  }
+  }]
 }
 </code></pre>
-<p>In our context we also call this the <em>Flow Definition</em>. A Flow Definition has a unique ID and a <em>root</em> task, that describes the work to be done. Every task can have a list of child tasks that get executed after the parent task has successfully finished its work.</p>
+<p>In our context we also call this the <strong>Flow Definition</strong>. A Flow Definition has a unique ID and a list of <em>root</em> tasks, that describes the work to be done. Every task can have a list of child tasks that get executed after the parent task has successfully finished its work.</p>
 <p>This task structure lead to a tree (a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed Acyclic Graph</a>, short DAG) of tasks that should be executed.</p>
-<p>When Sysiphos decides to run this workflow (because of the schedule or because it was triggered by the API) it will create a <em>Flow Instance</em> with a reference to the ID of a definition. Next it will also create <em>Flow Task Instance</em> for the root task. </p>
-<p>All of these entities allow a granular tracking and control of the execution. To handle the execution of multiple flow instances in parallel Sysiphos uses actors.</p>
-<p>There is a singleton actor to control the time based aspects of the scheduling which also acts as supervisor for the <em>Flow Instance</em> actors. These instance actors will spawn <em>Flow Task Instance</em> actors matching the parent-child relation of the tasks in the definition.</p>
-<p><img src="assets/hierarchy_table_relation.png" alt="actor-entity-relation" /></p>
+<p>A flow definition can have one or more schedules assigned to it, that will trigger the execution repeatedly.</p>
+<p>When Sysiphos decides to execute a flow definition (because of the schedule or because it was triggered by the API) it will create a <strong>Flow Instance</strong> with a reference to the ID of a definition. </p>
+<p>A flow instance has have a <strong>Context</strong> which is a dictionary of values that can be seen as additional attributes that define the instance. This context is available for string interpolation in tasks that provide some kind of template.</p>
+<p>Next it will also create <strong>Flow Task Instance</strong> for the first root task and try to execute it. Task will per default be retried 3 times if a failure happens.</p>
+<p>All of these entities allow a granular tracking and control of the execution. To handle the execution of multiple flow instances in parallel Sysiphos uses <a href="https://en.wikipedia.org/wiki/Actor_model">Actors</a>.</p>
+<p>See <a href="execution-model.html">Execuction Model</a> for a more detailed overview of the interaction of the actors with the introduces entities.</p>
 </div>
 <div>
 <a href="https://github.com/flowtick/sysiphos/tree/master/docs/intro.md" title="Edit this page" class="md-source-file md-edit">
@@ -221,13 +224,13 @@ Sysiphos
 </span>
 </div>
 </a>
-<a href="run.html" title="Run" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="execution-model.html" title="Execution Model" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Run
+Execution Model
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">

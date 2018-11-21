@@ -20,7 +20,7 @@
 
 <meta name="description" content="sysiphos-root">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Build · Sysiphos</title>
+<title>Execution Model · Sysiphos</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
@@ -60,7 +60,7 @@ data-md-color-accent="cyan"
 Sysiphos
 </span>
 <span class="md-header-nav__topic">
-Build
+Execution Model
 </span>
 </div>
 </div>
@@ -140,26 +140,17 @@ flowtick/sysiphos
 </div>
 <ul>
   <li><a href="intro.html" class="page">Introduction</a></li>
-  <li><a href="execution-model.html" class="page">Execution Model</a></li>
+  <li><a href="execution-model.html" class="active page">Execution Model</a></li>
   <li><a href="run.html" class="page">Run</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
   <li><a href="configuration.html" class="page">Configuration</a></li>
-  <li><a href="build.html" class="active page">Build</a></li>
+  <li><a href="build.html" class="page">Build</a></li>
   <li><a href="screenshots.html" class="page">Screenshots</a></li>
   <li><a href="acknowledgments.html" class="page">Acknowledgments</a></li>
   <li><a href="license.html" class="page">License</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">Table of contents</label>
-<ul>
-  <li><a href="build.html#build" class="header">Build</a>
-  <ul>
-    <li><a href="build.html#packaging" class="header">Packaging</a></li>
-    <li><a href="build.html#publishing" class="header">Publishing</a></li>
-    <li><a href="build.html#documentation" class="header">Documentation</a></li>
-  </ul></li>
-</ul>
 </nav>
 
 </nav>
@@ -173,70 +164,26 @@ flowtick/sysiphos
 </div>
 </div>
 </div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">Table of contents</label>
-<ul>
-  <li><a href="build.html#build" class="header">Build</a>
-  <ul>
-    <li><a href="build.html#packaging" class="header">Packaging</a></li>
-    <li><a href="build.html#publishing" class="header">Publishing</a></li>
-    <li><a href="build.html#documentation" class="header">Documentation</a></li>
-  </ul></li>
-</ul>
-</nav>
-
-</div>
-</div>
-</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h2><a href="#build" name="build" class="anchor"><span class="anchor-link"></span></a>Build</h2>
-<p>Sysiphos uses <a href="https://www.scala-sbt.org">sbt</a> as build tool. It is assumed that you have installed.</p>
-<p>The core libs should also work for older Scala versions, so remember to verify / run everything with the cross build prefix:</p>
-<pre class="prettyprint"><code class="language-bash">sbt +compile
-sbt +test
-</code></pre>
-<h2><a href="#packaging" name="packaging" class="anchor"><span class="anchor-link"></span></a>Packaging</h2>
-<p>Sysiphos uses <a href="https://github.com/sbt/sbt-native-packager">sbt-native-packager</a>, this allows to create multiple formats, see the documentation for details.</p>
-<p>Examples:</p>
-<pre class="prettyprint"><code class="language-bash"># creates a deb file
-sbt debian:packageBin 
-
-# create a zip package with start scripts
-sbt universal:packageBin 
-
-# create a tar.gz package with start scripts
-sbt universal:packageZipTarball 
-
-# create a local docker image
-sbt docker:publishLocal 
-</code></pre>
-<p>Build packages can be found in <code>server/jvm/target[/universal]</code></p>
-<h2><a href="#publishing" name="publishing" class="anchor"><span class="anchor-link"></span></a>Publishing</h2>
-<p>First build the docker image:</p>
-<pre class="prettyprint"><code class="language-bash">sbt docker:publishLocal
-</code></pre>
-<p>This will create a <code>latest</code> tag and one for the current build version.</p>
-<p>Then login and push it:</p>
-<pre class="prettyprint"><code class="language-bash">docker login 
-# enter your credentials
-docker push flowtick/sysiphos:latest
-</code></pre>
-<h2><a href="#documentation" name="documentation" class="anchor"><span class="anchor-link"></span></a>Documentation</h2>
-<p>Generate the site:</p>
-<pre class="prettyprint"><code class="language-bash">sbt makeSite
-</code></pre>
-<p>and check the result in <code>target/site</code>.</p>
-<p>If it looks good and you have the permissions, you can push it to the GitHub Pages via:</p>
-<pre class="prettyprint"><code class="language-bash">sbt ghpagesPushSite
-</code></pre>
+<h1><a href="#execution-model" name="execution-model" class="anchor"><span class="anchor-link"></span></a>Execution Model</h1>
+<p>The execution model of Sysiphos is implemented by an actor system using Akka.</p>
+<p>Every entity from the <a href="intro.html">Introduction</a> has a corresponding actor which updates the underlying repository for that entity:</p>
+<p><img src="assets/hierarchy_table_relation.png" alt="actors-entities-relation" /></p>
+<p>There is a singleton actor to control the time based aspects of the scheduling which also acts as supervisor for the <strong>Flow Instance</strong> actors. </p>
+<p>These instance actors will spawn <strong>Flow Task Instance</strong> actors matching the parent-child relation of the tasks in the definition. </p>
+<p>If a instance should be executed and the number of instances to consider for execution depend on the parallelism options in the flow definition:</p>
+<p><img src="diagrams/sysiphos-actors-init.png" alt="actors-init" /></p>
+<p>The task instance actors are responsible for executing the task and logging the results, which differs depending on the task type (see <a href="tasks.html">Tasks</a>):</p>
+<p><img src="diagrams/sysiphos-actors-exec.png" alt="actors-exec" /></p>
+<p>Depending on the result of the execution, the state of the task instance and the corresponding flow instance will be updated. Flow instances with tasks that still have retires are still considered as running executions:</p>
+<p><img src="diagrams/sysiphos-actors-flow-instance-exec.png" alt="actors-instance-exec" /></p>
+<p>The following state transitions are possible for an flow instance:</p>
+<p><img src="diagrams/sysiphos-actors-state.png" alt="instance-states" /></p>
 </div>
 <div>
-<a href="https://github.com/flowtick/sysiphos/tree/master/docs/build.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/flowtick/sysiphos/tree/master/docs/execution-model.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -252,7 +199,7 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="configuration.html" title="Configuration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<a href="intro.html" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -261,17 +208,17 @@ Edit this page
 <span class="md-footer-nav__direction">
 Previous
 </span>
-Configuration
+Introduction
 </span>
 </div>
 </a>
-<a href="screenshots.html" title="Screenshots" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="run.html" title="Run" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Screenshots
+Run
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
