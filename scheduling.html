@@ -20,7 +20,7 @@
 
 <meta name="description" content="sysiphos-root">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Tasks · Sysiphos</title>
+<title>Scheduling</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
@@ -47,7 +47,7 @@ data-md-color-accent="cyan"
 <nav class="md-header-nav md-grid">
 <div class="md-flex">
 <div class="md-flex__cell md-flex__cell--shrink">
-<a href="index.html" title="Sysiphos" class="md-header-nav__button md-logo">
+<a href="scheduling.html" title="Scheduling" class="md-header-nav__button md-logo">
 <img src="assets/logo.png" width="24" height="24">
 </a>
 </div>
@@ -56,12 +56,7 @@ data-md-color-accent="cyan"
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-<span class="md-header-nav__topic">
-Sysiphos
-</span>
-<span class="md-header-nav__topic">
-Tasks
-</span>
+Scheduling
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -116,12 +111,12 @@ flowtick/sysiphos
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--primary" data-md-level="0" style="visibility: hidden">
 <label class="md-nav__title md-nav__title--site" for="drawer">
-<a href="index.html" title="Sysiphos" class="md-nav__button md-logo">
+<a href="scheduling.html" title="Scheduling" class="md-nav__button md-logo">
 <span class="md-nav__button md-logo">
 <img src="assets/logo.png" width="24" height="24">
 </a>
-<a href="index.html" title="Sysiphos">
-Sysiphos
+<a href="scheduling.html" title="Scheduling">
+Scheduling
 </a>
 </label>
 <div class="md-nav__source">
@@ -139,23 +134,15 @@ flowtick/sysiphos
 
 </div>
 <ul>
-  <li><a href="intro.html" class="page">Introduction</a></li>
-  <li><a href="run.html" class="page">Run</a></li>
-  <li><a href="tutorial.html" class="page">Tutorial</a></li>
-  <li><a href="tasks.html" class="active page">Tasks</a></li>
-  <li><a href="configuration.html" class="page">Configuration</a></li>
-  <li><a href="build.html" class="page">Build</a></li>
-  <li><a href="screenshots.html" class="page">Screenshots</a></li>
-  <li><a href="acknowledgments.html" class="page">Acknowledgments</a></li>
-  <li><a href="license.html" class="page">License</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="tasks.html#tasks" class="header">Tasks</a>
+  <li><a href="scheduling.html#scheduling" class="header">Scheduling</a>
   <ul>
-    <li><a href="tasks.html#shell-task" class="header">Shell Task</a></li>
-    <li><a href="tasks.html#trigger-task" class="header">Trigger Task</a></li>
+    <li><a href="scheduling.html#examples" class="header">Examples</a></li>
+    <li><a href="scheduling.html#backfill" class="header">Backfill</a></li>
+    <li><a href="scheduling.html#creating-a-schedule" class="header">Creating a schedule</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -177,10 +164,11 @@ flowtick/sysiphos
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="tasks.html#tasks" class="header">Tasks</a>
+  <li><a href="scheduling.html#scheduling" class="header">Scheduling</a>
   <ul>
-    <li><a href="tasks.html#shell-task" class="header">Shell Task</a></li>
-    <li><a href="tasks.html#trigger-task" class="header">Trigger Task</a></li>
+    <li><a href="scheduling.html#examples" class="header">Examples</a></li>
+    <li><a href="scheduling.html#backfill" class="header">Backfill</a></li>
+    <li><a href="scheduling.html#creating-a-schedule" class="header">Creating a schedule</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -191,35 +179,27 @@ flowtick/sysiphos
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#tasks" name="tasks" class="anchor"><span class="anchor-link"></span></a>Tasks</h1>
-<p>The following sections will give you an overview on the available task types.</p>
-<h3><a href="#shell-task" name="shell-task" class="anchor"><span class="anchor-link"></span></a>Shell Task</h3>
-<h4><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h4>
-<pre class="prettyprint"><code class="language-json">{
-    &quot;id&quot; : &quot;task-id&quot;,
-    &quot;type&quot; : &quot;shell&quot;,
-    &quot;command&quot; : &quot;some command&quot;,
-    &quot;shell&quot;: &quot;bash&quot;,
-    &quot;children&quot; : []
-}
+<h1><a href="#scheduling" name="scheduling" class="anchor"><span class="anchor-link"></span></a>Scheduling</h1>
+<p>It is possible to create a schedule to run flow definitions automatically.</p>
+<p>A schedule consists of a cron-like expression that defines the time intervals to wait between each run.</p>
+<p>Sysiphos uses cron4s, which allows cron expressions that go from seconds to day of week in the following order:</p>
+<pre><code>Seconds
+Minutes
+Hour Of Day
+Day Of Month
+Month
+Day Of Week
 </code></pre>
-<p>Will execute the command and be considered successfully on exit code <code>0</code>. Be aware that the shell is optional, if not specified the JVM process builder will be used to execute the command. If shell specific features like output piping etc. are needed, please set it accordingly.</p>
-<h4><a href="#string-interpolation" name="string-interpolation" class="anchor"><span class="anchor-link"></span></a>String Interpolation</h4>
-<p>Its possible to use <a href="https://freemarker.apache.org">freemarker</a> expression to access the context of the instance or system properties.</p>
-<p>For example, the execution of <code>&quot;command&quot; : &quot;echo Hello ${name}&quot;</code> in an instance that has the context value <code>name</code> set to <code>World</code> will print <code>Hello World</code> to the log.</p>
-<h3><a href="#trigger-task" name="trigger-task" class="anchor"><span class="anchor-link"></span></a>Trigger Task</h3>
-<h4><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h4>
-<pre class="prettyprint"><code class="language-json">{
-    &quot;id&quot; : &quot;task-id&quot;,
-    &quot;type&quot; : &quot;trigger&quot;,
-    &quot;flowDefinitionId&quot; : &quot;some-flow-id&quot;,
-    &quot;children&quot; : []
-}
+<h1><a href="#examples" name="examples" class="anchor"><span class="anchor-link"></span></a>Examples</h1>
+<pre><code>0 0 12 * * ? 	#Fire at 12pm (noon) every day
 </code></pre>
-<p>Will trigger the execution of the given flow definition id. The context values of the current flow will be copied over to the new instance.</p>
+<h1><a href="#backfill" name="backfill" class="anchor"><span class="anchor-link"></span></a>Backfill</h1>
+<p>Per default a schedule will back fill its schedule, which means that it will take the last schedule date as starting point to determine the next schedule date.</p>
+<h1><a href="#creating-a-schedule" name="creating-a-schedule" class="anchor"><span class="anchor-link"></span></a>Creating a schedule</h1>
+<p>Schedules can be created in the API using the <code>createFlowSchedule</code> mutation, or in the corresponding UI section in the flow overview.</p>
 </div>
 <div>
-<a href="https://github.com/flowtick/sysiphos/tree/master/docs/tasks.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/flowtick/sysiphos/tree/master/docs/scheduling.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -233,36 +213,6 @@ Edit this page
 </div>
 </main>
 <footer class="md-footer">
-<div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<a href="tutorial.html" title="Tutorial" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-Previous
-</span>
-Tutorial
-</span>
-</div>
-</a>
-<a href="configuration.html" title="Configuration" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-Next
-</span>
-Configuration
-</span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a>
-</nav>
-</div>
 <div class="md-footer-meta md-typeset">
 <div class="md-footer-meta__inner md-grid">
 <div class="md-footer-copyright">

@@ -169,7 +169,8 @@ flowtick/sysiphos
 <h2><a href="#configuration" name="configuration" class="anchor"><span class="anchor-link"></span></a>Configuration</h2>
 <p>Sysiphos allows configuration via Java system properties or environment variables.</p>
 <p>The corresponding environment variable for a property is created by making it upper case with all <code>.</code> characters replaced by <code>_</code>.</p>
-<p>So <code>a.property.key</code> becomes <code>A_PROPERTY_KEY</code>. Sysiphos will first look for the property value, then for the corresponding environment variable and then fallback to default if possible.</p>
+<p>So <code>a.property.key</code> becomes <code>A_PROPERTY_KEY</code>. </p>
+<p>Sysiphos will first look for the property value, then for the corresponding environment variable and then fallback to default if possible.</p>
 <table>
   <thead>
     <tr>
@@ -202,12 +203,37 @@ flowtick/sysiphos
     <tr>
       <td>logger.impl </td>
       <td align="center">file </td>
-      <td align="right">The logger implementation, currently one of <em>(file, console)</em>, console will use stdout </td>
+      <td align="right">The logger backend implementation, currently one of <em>(file-direct, file-stream, s3, console)</em>, console will use stdout </td>
+    </tr>
+    <tr>
+      <td>logger.stream.chunkSize </td>
+      <td align="center">100 </td>
+      <td align="right">The number of lines to aggregate (chunking) before writing to the log backend, only applies to stream backends like <code>s3</code> or <code>file-stream</code> </td>
+    </tr>
+    <tr>
+      <td>logger.stream.queueSize </td>
+      <td align="center">1000 </td>
+      <td align="right">The size of the queue used for interacting with the process output </td>
     </tr>
     <tr>
       <td>logger.file.baseDir </td>
       <td align="center">/tmp (the value of <code>java.io.tmpdir</code>) </td>
-      <td align="right">The base directory to use for logging </td>
+      <td align="right">The base directory to use for logging for the file based backends </td>
+    </tr>
+    <tr>
+      <td>logger.s3.accessKey </td>
+      <td align="center">changeme </td>
+      <td align="right">The access key to use for logging to S3 (default credentials chain is checked first) </td>
+    </tr>
+    <tr>
+      <td>logger.s3.secretKey </td>
+      <td align="center">changeme </td>
+      <td align="right">The secret key to use for logging to S3 (default credentials chain is checked first) </td>
+    </tr>
+    <tr>
+      <td>logger.s3.bucket </td>
+      <td align="center">changeme </td>
+      <td align="right">The bucket to use for S3 logging, this can be seen as the root folder for logging </td>
     </tr>
     <tr>
       <td>http.bind.address </td>
@@ -228,6 +254,16 @@ flowtick/sysiphos
       <td>api.threads </td>
       <td align="center">10 </td>
       <td align="right">number of threads to use for api request handling </td>
+    </tr>
+    <tr>
+      <td>task.retries.default </td>
+      <td align="center">3 </td>
+      <td align="right">default number of retries for a task, if not specified otherwise </td>
+    </tr>
+    <tr>
+      <td>task.retry.delay.default </td>
+      <td align="center">18000 </td>
+      <td align="right">default number of seconds to wait until next try, if not specified otherwise </td>
     </tr>
   </tbody>
 </table>
