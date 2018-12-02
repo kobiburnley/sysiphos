@@ -20,7 +20,7 @@
 
 <meta name="description" content="sysiphos-root">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Configuration · Sysiphos</title>
+<title>Concurrency · Sysiphos</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
@@ -60,7 +60,7 @@ data-md-color-accent="cyan"
 Sysiphos
 </span>
 <span class="md-header-nav__topic">
-Configuration
+Concurrency
 </span>
 </div>
 </div>
@@ -141,17 +141,25 @@ flowtick/sysiphos
 <ul>
   <li><a href="intro.html" class="page">Introduction</a></li>
   <li><a href="execution-model.html" class="page">Execution Model</a></li>
-  <li><a href="concurrency.html" class="page">Concurrency</a></li>
+  <li><a href="concurrency.html" class="active page">Concurrency</a></li>
   <li><a href="run.html" class="page">Run</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
-  <li><a href="configuration.html" class="active page">Configuration</a></li>
+  <li><a href="configuration.html" class="page">Configuration</a></li>
   <li><a href="build.html" class="page">Build</a></li>
   <li><a href="screenshots.html" class="page">Screenshots</a></li>
   <li><a href="acknowledgments.html" class="page">Acknowledgments</a></li>
   <li><a href="license.html" class="page">License</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="concurrency.html#concurrency" class="header">Concurrency</a>
+  <ul>
+    <li><a href="concurrency.html#instance-level" class="header">Instance Level</a></li>
+    <li><a href="concurrency.html#task-level" class="header">Task Level</a></li>
+  </ul></li>
+</ul>
 </nav>
 
 </nav>
@@ -165,113 +173,46 @@ flowtick/sysiphos
 </div>
 </div>
 </div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="concurrency.html#concurrency" class="header">Concurrency</a>
+  <ul>
+    <li><a href="concurrency.html#instance-level" class="header">Instance Level</a></li>
+    <li><a href="concurrency.html#task-level" class="header">Task Level</a></li>
+  </ul></li>
+</ul>
+</nav>
+
+</div>
+</div>
+</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h2><a href="#configuration" name="configuration" class="anchor"><span class="anchor-link"></span></a>Configuration</h2>
-<p>Sysiphos allows configuration via Java system properties or environment variables.</p>
-<p>The corresponding environment variable for a property is created by making it upper case with all <code>.</code> characters replaced by <code>_</code>.</p>
-<p>So <code>a.property.key</code> becomes <code>A_PROPERTY_KEY</code>. </p>
-<p>Sysiphos will first look for the property value, then for the corresponding environment variable and then fallback to default if possible.</p>
-<table>
-  <thead>
-    <tr>
-      <th>Property </th>
-      <th align="center">Default </th>
-      <th align="right">Description </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>database.url </td>
-      <td align="center">jdbc:h2:mem:sysiphos;DB_CLOSE_DELAY=-1 </td>
-      <td align="right">The JDBC URL to use </td>
-    </tr>
-    <tr>
-      <td>database.user </td>
-      <td align="center">sa </td>
-      <td align="right">The JDBC user to use </td>
-    </tr>
-    <tr>
-      <td>database.password </td>
-      <td align="center">empty string </td>
-      <td align="right">The JDBC password to use </td>
-    </tr>
-    <tr>
-      <td>database.profile </td>
-      <td align="center">h2 </td>
-      <td align="right">The database type, currently one of <em>(h2, mysql)</em> </td>
-    </tr>
-    <tr>
-      <td>logger.impl </td>
-      <td align="center">file </td>
-      <td align="right">The logger backend implementation, currently one of <em>(file-direct, file-stream, s3, console)</em>, console will use stdout </td>
-    </tr>
-    <tr>
-      <td>logger.stream.chunkSize </td>
-      <td align="center">100 </td>
-      <td align="right">The number of lines to aggregate (chunking) before writing to the log backend, only applies to stream backends like <code>s3</code> or <code>file-stream</code> </td>
-    </tr>
-    <tr>
-      <td>logger.stream.queueSize </td>
-      <td align="center">1000 </td>
-      <td align="right">The size of the queue used for interacting with the process output </td>
-    </tr>
-    <tr>
-      <td>logger.file.baseDir </td>
-      <td align="center">/tmp (the value of <code>java.io.tmpdir</code>) </td>
-      <td align="right">The base directory to use for logging for the file based backends </td>
-    </tr>
-    <tr>
-      <td>logger.s3.accessKey </td>
-      <td align="center">changeme </td>
-      <td align="right">The access key to use for logging to S3 (default credentials chain is checked first) </td>
-    </tr>
-    <tr>
-      <td>logger.s3.secretKey </td>
-      <td align="center">changeme </td>
-      <td align="right">The secret key to use for logging to S3 (default credentials chain is checked first) </td>
-    </tr>
-    <tr>
-      <td>logger.s3.bucket </td>
-      <td align="center">changeme </td>
-      <td align="right">The bucket to use for S3 logging, this can be seen as the root folder for logging </td>
-    </tr>
-    <tr>
-      <td>http.bind.address </td>
-      <td align="center">0.0.0.0 </td>
-      <td align="right">Address to use to bind the http server </td>
-    </tr>
-    <tr>
-      <td>http.port </td>
-      <td align="center">8080 </td>
-      <td align="right">Port to use to bind the http server </td>
-    </tr>
-    <tr>
-      <td>instance.threads </td>
-      <td align="center">10 </td>
-      <td align="right">number of threads to use for database access during instance execution </td>
-    </tr>
-    <tr>
-      <td>api.threads </td>
-      <td align="center">10 </td>
-      <td align="right">number of threads to use for api request handling </td>
-    </tr>
-    <tr>
-      <td>task.retries.default </td>
-      <td align="center">3 </td>
-      <td align="right">default number of retries for a task, if not specified otherwise </td>
-    </tr>
-    <tr>
-      <td>task.retry.delay.default </td>
-      <td align="center">18000 </td>
-      <td align="right">default number of seconds to wait until next try, if not specified otherwise </td>
-    </tr>
-  </tbody>
-</table>
+<h1><a href="#concurrency" name="concurrency" class="anchor"><span class="anchor-link"></span></a>Concurrency</h1>
+<p>Sysiphos allows to specify concurrency on both the flow instance and the task instance level (see ref:<a href="execution-model.md">Execution Model</a> for reference).</p>
+<h2><a href="#instance-level" name="instance-level" class="anchor"><span class="anchor-link"></span></a>Instance Level</h2>
+<p>The number of running instances can be controlled the following properties on the flow definition:</p>
+<ul>
+  <li><code>parallelism: Int</code> sets how many instances are allowed to run in parallel, if there are more instances schedules they will stay in initial state until the older instances are done</li>
+  <li><code>latestOnly : Boolean</code> allows the scheduler to skip instances that are scheduled, but would lead to the same execution. Same meaning that they execute the same flow definition with the same context values. This could occur when the instance execution is slow, so that the schedule (but also calls to the API) leads to more of the same instances. Skipping such instances can save time and resources.</li>
+</ul>
+<h2><a href="#task-level" name="task-level" class="anchor"><span class="anchor-link"></span></a>Task Level</h2>
+<p>Every instance actor is the holder of a task stream that can be controlled via the following properties on the flow definition:</p>
+<ul>
+  <li><code>taskParallelism: Int</code> defines how many tasks can run in parallel in a given instance</li>
+  <li><code>taskRatePerSecond: Int</code> defines how many tasks will at max be done per second</li>
+</ul>
+<p>The following example shows a graph with 2 tasks running in parallel:</p>
+<p><img src="diagrams/task-status-legend.png" alt="concurrent task example" /></p>
+<p>The task parallelism also defines how many task actors will be available for the work generated by the task stream. There is a back-pressure mechanism in place, so new instances will only be executed if the of pool task actors has the capacity. Otherwise the enqueueing into the queue of the task stream will be denied.</p>
 </div>
 <div>
-<a href="https://github.com/flowtick/sysiphos/tree/master/docs/configuration.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/flowtick/sysiphos/tree/master/docs/concurrency.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -287,7 +228,7 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="tasks.html" title="Tasks" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<a href="execution-model.html" title="Execution Model" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -296,17 +237,17 @@ Edit this page
 <span class="md-footer-nav__direction">
 Previous
 </span>
-Tasks
+Execution Model
 </span>
 </div>
 </a>
-<a href="build.html" title="Build" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="run.html" title="Run" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Build
+Run
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
