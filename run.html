@@ -143,6 +143,7 @@ flowtick/sysiphos
   <li><a href="execution-model.html" class="page">Execution Model</a></li>
   <li><a href="concurrency.html" class="page">Concurrency</a></li>
   <li><a href="run.html" class="active page">Run</a></li>
+  <li><a href="monitoring.html" class="page">Monitoring</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
   <li><a href="configuration.html" class="page">Configuration</a></li>
@@ -220,16 +221,30 @@ services:
 
   sysiphos:
     image: flowtick/sysiphos:latest
+    depends_on:
+      - db
     links:
       - db
+      - grafana
     ports:
       - 9090:8080
+      - 10095:9095
     environment:
       DATABASE_PROFILE: mysql
       DATABASE_URL: jdbc:mysql://db:3306/sysiphos
       DATABASE_USER: root
       DATABASE_PASSWORD: example
-</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docker-compose-dev.yml">Full source at GitHub</a>
+      STATS_ENABLED: &quot;true&quot;
+      STATS_HOST: grafana
+
+  grafana:
+    image: kamon/grafana_graphite
+    ports:
+      - 3000:80
+      - 3001:81
+      - 8125:8125/udp
+      - 8126:8126
+      - 2003:2003</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docker-compose-dev.yml">Full source at GitHub</a>
 <h3><a href="#from-source" name="from-source" class="anchor"><span class="anchor-link"></span></a>From Source</h3>
 <p>The server can also be run directly in the source directory via <code>sbt</code></p>
 <pre class="prettyprint"><code class="language-bash">sbt serverJVM/run -Dprop=value
@@ -266,13 +281,13 @@ Concurrency
 </span>
 </div>
 </a>
-<a href="tutorial.html" title="Tutorial" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="monitoring.html" title="Monitoring" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Tutorial
+Monitoring
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">

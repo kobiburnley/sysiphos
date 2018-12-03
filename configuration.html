@@ -143,6 +143,7 @@ flowtick/sysiphos
   <li><a href="execution-model.html" class="page">Execution Model</a></li>
   <li><a href="concurrency.html" class="page">Concurrency</a></li>
   <li><a href="run.html" class="page">Run</a></li>
+  <li><a href="monitoring.html" class="page">Monitoring</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="page">Tasks</a></li>
   <li><a href="configuration.html" class="active page">Configuration</a></li>
@@ -246,6 +247,21 @@ flowtick/sysiphos
       <td>http.port </td>
       <td align="center">8080 </td>
       <td align="right">Port to use to bind the http server </td>
+    </tr>
+    <tr>
+      <td>stats.enabled </td>
+      <td align="center">false </td>
+      <td align="right">flag to enable to export operational statistics </td>
+    </tr>
+    <tr>
+      <td>stats.host </td>
+      <td align="center">none </td>
+      <td align="right">Host of the stats server to use for StatsD </td>
+    </tr>
+    <tr>
+      <td>stats.port </td>
+      <td align="center">8125 </td>
+      <td align="right">Port of the stats server to use for StatsD </td>
     </tr>
     <tr>
       <td>instance.threads </td>
