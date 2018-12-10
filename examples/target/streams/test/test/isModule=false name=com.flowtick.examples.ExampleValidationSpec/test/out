@@ -1,0 +1,7 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mExampleValidationSpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a valid shell example[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a valid camel-http example[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a valid camel-slack example[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a valid camel-sql example[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a valid camel-bean example[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a valid trigger example[0m[0m

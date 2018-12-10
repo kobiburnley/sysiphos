@@ -146,6 +146,7 @@ flowtick/sysiphos
   <li><a href="monitoring.html" class="page">Monitoring</a></li>
   <li><a href="tutorial.html" class="page">Tutorial</a></li>
   <li><a href="tasks.html" class="active page">Tasks</a></li>
+  <li><a href="camel.html" class="page">Camel Tasks</a></li>
   <li><a href="configuration.html" class="page">Configuration</a></li>
   <li><a href="build.html" class="page">Build</a></li>
   <li><a href="screenshots.html" class="page">Screenshots</a></li>
@@ -159,6 +160,7 @@ flowtick/sysiphos
   <ul>
     <li><a href="tasks.html#shell-task" class="header">Shell Task</a></li>
     <li><a href="tasks.html#trigger-task" class="header">Trigger Task</a></li>
+    <li><a href="tasks.html#string-interpolation" class="header">String Interpolation</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -184,6 +186,7 @@ flowtick/sysiphos
   <ul>
     <li><a href="tasks.html#shell-task" class="header">Shell Task</a></li>
     <li><a href="tasks.html#trigger-task" class="header">Trigger Task</a></li>
+    <li><a href="tasks.html#string-interpolation" class="header">String Interpolation</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -196,30 +199,38 @@ flowtick/sysiphos
 <div class="md-content__searchable">
 <h1><a href="#tasks" name="tasks" class="anchor"><span class="anchor-link"></span></a>Tasks</h1>
 <p>The following sections will give you an overview on the available task types.</p>
-<h3><a href="#shell-task" name="shell-task" class="anchor"><span class="anchor-link"></span></a>Shell Task</h3>
-<h4><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h4>
+<h2><a href="#shell-task" name="shell-task" class="anchor"><span class="anchor-link"></span></a>Shell Task</h2>
 <pre class="prettyprint"><code class="language-json">{
-    &quot;id&quot; : &quot;task-id&quot;,
-    &quot;type&quot; : &quot;shell&quot;,
-    &quot;command&quot; : &quot;some command&quot;,
-    &quot;shell&quot;: &quot;bash&quot;,
-    &quot;children&quot; : []
-}
-</code></pre>
+  &quot;id&quot;: &quot;shell-flow&quot;,
+  &quot;tasks&quot;: [
+    {
+      &quot;id&quot; : &quot;task-id&quot;,
+      &quot;type&quot; : &quot;shell&quot;,
+      &quot;command&quot; : &quot;some command&quot;,
+      &quot;shell&quot;: &quot;bash&quot;,
+      &quot;children&quot; : []
+    }
+  ]
+}</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docs/examples/src/main/resources/shell-flow.json">Full source at GitHub</a>
 <p>Will execute the command and be considered successfully on exit code <code>0</code>. Be aware that the shell is optional, if not specified the JVM process builder will be used to execute the command. If shell specific features like output piping etc. are needed, please set it accordingly.</p>
-<h4><a href="#string-interpolation" name="string-interpolation" class="anchor"><span class="anchor-link"></span></a>String Interpolation</h4>
-<p>Its possible to use <a href="https://freemarker.apache.org">freemarker</a> expression to access the context of the instance or system properties.</p>
-<p>For example, the execution of <code>&quot;command&quot; : &quot;echo Hello ${name}&quot;</code> in an instance that has the context value <code>name</code> set to <code>World</code> will print <code>Hello World</code> to the log.</p>
-<h3><a href="#trigger-task" name="trigger-task" class="anchor"><span class="anchor-link"></span></a>Trigger Task</h3>
-<h4><a href="#example" name="example" class="anchor"><span class="anchor-link"></span></a>Example</h4>
+<p>The command property supports <a href="#string-interpolation">string interpolation</a>.</p>
+<h2><a href="#trigger-task" name="trigger-task" class="anchor"><span class="anchor-link"></span></a>Trigger Task</h2>
 <pre class="prettyprint"><code class="language-json">{
-    &quot;id&quot; : &quot;task-id&quot;,
-    &quot;type&quot; : &quot;trigger&quot;,
-    &quot;flowDefinitionId&quot; : &quot;some-flow-id&quot;,
-    &quot;children&quot; : []
-}
-</code></pre>
+  &quot;id&quot;: &quot;trigger-flow&quot;,
+  &quot;tasks&quot;: [
+    {
+      &quot;id&quot; : &quot;task-id&quot;,
+      &quot;type&quot; : &quot;trigger&quot;,
+      &quot;flowDefinitionId&quot; : &quot;some-flow-id&quot;,
+      &quot;tasks&quot; : []
+    }
+  ]
+}</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docs/examples/src/main/resources/trigger-flow.json">Full source at GitHub</a>
 <p>Will trigger the execution of the given flow definition id. The context values of the current flow will be copied over to the new instance.</p>
+<p>Note that the triggering instance will not wait for the completion of the triggered instance,<br/>once the instance is successfully created, the trigger task is considered done.</p>
+<h1><a href="#string-interpolation" name="string-interpolation" class="anchor"><span class="anchor-link"></span></a>String Interpolation</h1>
+<p>Its possible to use <a href="https://freemarker.apache.org">freemarker</a> expression to access the context of the instance or system properties on some tasks that support it.</p>
+<p>For example, the execution of <code>&quot;command&quot; : &quot;echo Hello ${name}&quot;</code> in an instance that has the context value <code>name</code> with value <code>World</code> will print <code>Hello World</code> to the log.</p>
 </div>
 <div>
 <a href="https://github.com/flowtick/sysiphos/tree/master/docs/tasks.md" title="Edit this page" class="md-source-file md-edit">
@@ -251,13 +262,13 @@ Tutorial
 </span>
 </div>
 </a>
-<a href="configuration.html" title="Configuration" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="camel.html" title="Camel Tasks" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Configuration
+Camel Tasks
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
