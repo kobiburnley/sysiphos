@@ -154,6 +154,7 @@ flowtick/sysiphos
   <li><a href="index.html#sysiphos" class="header">Sysiphos</a>
   <ul>
     <li><a href="index.html#why-" class="header">Why?</a></li>
+    <li><a href="index.html#comparison" class="header">Comparison</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -178,6 +179,7 @@ flowtick/sysiphos
   <li><a href="index.html#sysiphos" class="header">Sysiphos</a>
   <ul>
     <li><a href="index.html#why-" class="header">Why?</a></li>
+    <li><a href="index.html#comparison" class="header">Comparison</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -202,6 +204,103 @@ flowtick/sysiphos
 </ul>
 <p>Sysiphos wants to be that solution.</p>
 <p>That being that, Sysiphos is heavily influenced by the usage of the above mentioned tools and tries to pick the best features of each. Its currently not a feature-rich as any of those solutions and provides basic scheduling.</p>
+<h1><a href="#comparison" name="comparison" class="anchor"><span class="anchor-link"></span></a>Comparison</h1>
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th align="center">Sysiphos </th>
+      <th align="center">Airflow </th>
+      <th align="right">Oozie </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Definition Format </td>
+      <td align="center">Json </td>
+      <td align="center">Python </td>
+      <td align="right">XML </td>
+    </tr>
+    <tr>
+      <td>Definition Model </td>
+      <td align="center">DAG </td>
+      <td align="center">DAG </td>
+      <td align="right">Workflow Graph </td>
+    </tr>
+    <tr>
+      <td>Target Group </td>
+      <td align="center">JVM-minded, admins </td>
+      <td align="center">Python-minded, admins </td>
+      <td align="right">Hadoop Users </td>
+    </tr>
+    <tr>
+      <td>Dependencies </td>
+      <td align="center">RDBMS (H2, MySQL, Postgres) </td>
+      <td align="center">RDBMS (MySQL, Postgres), Celery (Redis) </td>
+      <td align="right">Hadoop (HUE, HDFS) </td>
+    </tr>
+    <tr>
+      <td>Monitoring Support </td>
+      <td align="center">StatsD, Prometheus </td>
+      <td align="center">StatsD </td>
+      <td align="right">? </td>
+    </tr>
+    <tr>
+      <td>Packaging </td>
+      <td align="center">tar.gz, docker image </td>
+      <td align="center">pip, community docker image </td>
+      <td align="right">Part of the Hadoop distribution </td>
+    </tr>
+    <tr>
+      <td>Integration Support </td>
+      <td align="center">100+ components via Camel </td>
+      <td align="center">many community contributed operators, sensors etc. </td>
+      <td align="right">none </td>
+    </tr>
+    <tr>
+      <td>Workflow Pattern Support </td>
+      <td align="center">basic (sequence, trigger) </td>
+      <td align="center">advanced (sequence, branching, trigger, sub-dag) </td>
+      <td align="right">basic (sequence, branching) </td>
+    </tr>
+    <tr>
+      <td>Data Sharing Concept </td>
+      <td align="center">local, dynamic (instance context values, extractions) </td>
+      <td align="center">global, static (XComs, Variables) </td>
+      <td align="right">none </td>
+    </tr>
+    <tr>
+      <td>Execution Model </td>
+      <td align="center">actors, streams (internal queues) </td>
+      <td align="center">threads, external queues </td>
+      <td align="right">intertwined with the Yarn application model </td>
+    </tr>
+    <tr>
+      <td>Scale </td>
+      <td align="center">high volume, streaming (tasks / seconds) </td>
+      <td align="center">low volume, batching (tasks / minute / hour) </td>
+      <td align="right">low volume, batching </td>
+    </tr>
+    <tr>
+      <td>High Availability </td>
+      <td align="center">Akka Clustering (WIP) </td>
+      <td align="center">via Celery worker scaling </td>
+      <td align="right">via Hadoop </td>
+    </tr>
+    <tr>
+      <td>API </td>
+      <td align="center">self documenting GraphQL HTTP API </td>
+      <td align="center">experimental HTTP API (only execute instance, only one per DAG / second)</td>
+      <td align="right">SOAP</td>
+    </tr>
+    <tr>
+      <td>UI </td>
+      <td align="center">single page application (API-powered) </td>
+      <td align="center">form-based </td>
+      <td align="right">HUE, ExtJS Application</td>
+    </tr>
+  </tbody>
+</table>
 <p>See the <a href="intro.html">Introduction</a> to read about the core concepts.</p>
 </div>
 <div>
