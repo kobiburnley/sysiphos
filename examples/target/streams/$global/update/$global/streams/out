@@ -4835,35 +4835,35 @@
 [0m[[0m[0mdebug[0m] [0m[0mignoring unhandled DependencyDescriptorMediator: class sbt.internal.librarymanagement.IvyScalaUtil$OverrideScalaMediator[0m
 [0m[[0m[0mdebug[0m] [0m[0m	resolved ivy file produced in cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m:: downloading artifacts ::[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.7!scala-library.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-core_2.12;1.4.0!cats-core_2.12.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-effect_2.12;1.0.0!cats-effect_2.12.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-core_2.12;0.10.0!circe-core_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-generic_2.12;0.10.0!circe-generic_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-parser_2.12;0.10.0!circe-parser_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.7!scala-library.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-macros_2.12;1.4.0!cats-macros_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-core_2.12;1.4.0!cats-core_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-kernel_2.12;1.4.0!cats-kernel_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-effect_2.12;1.0.0!cats-effect_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#machinist_2.12;0.6.5!machinist_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-core_2.12;0.10.0!circe-core_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.12.7!scala-reflect.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.chuusai#shapeless_2.12;2.3.3!shapeless_2.12.jar(bundle)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-jawn_2.12;0.10.0!circe-jawn_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-numbers_2.12;0.10.0!circe-numbers_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.spire-math#jawn-parser_2.12;0.13.0!jawn-parser_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#macro-compat_2.12;1.1.1!macro-compat_2.12.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.chuusai#shapeless_2.12;2.3.3!shapeless_2.12.jar(bundle)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.4!scalatest_2.12.jar(bundle)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalamock#scalamock_2.12;4.1.0!scalamock_2.12.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.4!scalactic_2.12.jar(bundle)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#macro-compat_2.12;1.1.1!macro-compat_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-classic;1.2.3!logback-classic.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-jawn_2.12;0.10.0!circe-jawn_2.12.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.4!scalactic_2.12.jar(bundle)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.spire-math#jawn-parser_2.12;0.13.0!jawn-parser_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.5!scala-xml_2.12.jar(bundle)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.12;1.0.4!scala-parser-combinators_2.12.jar(bundle)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-core;1.2.3!logback-core.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.aspectj#aspectjweaver;1.8.10!aspectjweaver.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.7!scala-compiler.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.wartremover#wartremover_2.12;2.2.1!wartremover_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] jline#jline;2.14.6!jline.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.7!scala-compiler.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(bundle)[0m
-[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 538ms :: artifacts dl 8ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 582ms :: artifacts dl 11ms[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT compile produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-compile.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT runtime produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-runtime.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT test produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-test.xml[0m
@@ -4877,7 +4877,7 @@
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT pom produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-pom.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT scala-tool produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-scala-tool.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT scoveragePlugin produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-scoveragePlugin.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	resolve done (538ms resolve - 8ms download)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	resolve done (582ms resolve - 11ms download)[0m
 [0m[[0m[0minfo[0m] [0m[0mDone updating.[0m
 [0m[[0m[33mwarn[0m] [0m[0mThere may be incompatibilities among your library dependencies.[0m
 [0m[[0m[33mwarn[0m] [0m[0mRun 'evicted' to see detailed eviction warnings[0m
