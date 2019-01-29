@@ -212,7 +212,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: sysiphos
-
+    networks:
+      main:
+        aliases:
+          - db
   # to have a look at the tables etc.
   adminer:
     image: adminer
@@ -220,17 +223,49 @@ services:
     ports:
     - 9091:8080
 
-  sysiphos:
+  sysiphos-master:
     image: flowtick/sysiphos:latest
     depends_on:
       - db
-    links:
-      - db
-      - grafana
     ports:
-      - 9090:8080
-      - 10095:9095
+      - 1040:8080
+      - 1050:8558
+      - 1060:9095
+    networks:
+      main:
+        aliases:
+          - sysiphos-master
     environment:
+      CLUSTER_ENABLED: &quot;true&quot;
+      CLUSTER_IP: &quot;sysiphos-master&quot;
+      ALLOW_MASTER: &quot;on&quot;
+      ENDPOINT1_IP: &quot;sysiphos-master&quot;
+      ENDPOINT2_IP: &quot;sysiphos-worker&quot;
+      DATABASE_PROFILE: mysql
+      DATABASE_URL: jdbc:mysql://db:3306/sysiphos
+      DATABASE_USER: root
+      DATABASE_PASSWORD: example
+      STATS_ENABLED: &quot;true&quot;
+      STATS_HOST: grafana
+
+  sysiphos-worker:
+    image: flowtick/sysiphos:latest
+    depends_on:
+      - db
+    ports:
+      - 2040:8080
+      - 2050:8558
+      - 2060:9095
+    networks:
+      main:
+        aliases:
+          - sysiphos-worker
+    environment:
+      CLUSTER_ENABLED: &quot;true&quot;
+      CLUSTER_IP: &quot;sysiphos-worker&quot;
+      ALLOW_MASTER: &quot;off&quot;
+      ENDPOINT1_IP: &quot;sysiphos-master&quot;
+      ENDPOINT2_IP: &quot;sysiphos-worker&quot;
       DATABASE_PROFILE: mysql
       DATABASE_URL: jdbc:mysql://db:3306/sysiphos
       DATABASE_USER: root
@@ -245,7 +280,13 @@ services:
       - 3001:81
       - 8125:8125/udp
       - 8126:8126
-      - 2003:2003</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docker-compose-dev-mysql.yml">Full source at GitHub</a>
+      - 2003:2003
+    networks:
+      main:
+        aliases:
+          - grafana
+networks:
+  main:</code></pre><a href="https://github.com/flowtick/sysiphos/tree/master/docker-compose-dev-mysql.yml">Full source at GitHub</a>
 <h3><a href="#from-source" name="from-source" class="anchor"><span class="anchor-link"></span></a>From Source</h3>
 <p>The server can also be run directly in the source directory via <code>sbt</code></p>
 <pre class="prettyprint"><code class="language-bash">sbt serverJVM/run -Dprop=value
