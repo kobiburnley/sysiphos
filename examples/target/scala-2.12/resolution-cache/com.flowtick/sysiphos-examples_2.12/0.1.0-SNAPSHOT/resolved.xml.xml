@@ -4,7 +4,7 @@
 		module="sysiphos-examples_2.12"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20190216120623"
+		publication="20190219105028"
 	>
 		<license name="APL2" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
 		<description homepage="https://github.com/flowtick/sysiphos">
@@ -33,8 +33,8 @@
 		<artifact name="sysiphos-examples_2.12" type="doc" ext="jar" conf="compile" e:classifier="javadoc"/>
 	</publications>
 	<dependencies>
-		<dependency org="org.scala-lang" name="scala-compiler" rev="2.12.7" conf="scala-tool->default,optional(default)"/>
-		<dependency org="org.scala-lang" name="scala-library" rev="2.12.7" conf="scala-tool->default,optional(default);compile->default(compile)"/>
+		<dependency org="org.scala-lang" name="scala-compiler" rev="2.12.8" conf="scala-tool->default,optional(default)"/>
+		<dependency org="org.scala-lang" name="scala-library" rev="2.12.8" conf="scala-tool->default,optional(default);compile->default(compile)"/>
 		<dependency org="com.flowtick" name="sysiphos-core_2.12" rev="0.1.0-SNAPSHOT" conf="compile->default(compile)"/>
 		<dependency org="org.aspectj" name="aspectjweaver" rev="1.8.10" conf="aspectj-runner->default(compile)"/>
 		<dependency org="org.wartremover" name="wartremover_2.12" rev="2.2.1" conf="plugin->default(compile)"/>
