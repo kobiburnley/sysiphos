@@ -1846,6 +1846,7 @@
 [0m[[0m[0mdebug[0m] [0m[0mdependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.8 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.8 {scala-tool=[default, optional(default)]}[0m
 [0m[[0m[0mdebug[0m] [0m[0mdependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.8 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.8 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.8 {scala-tool=[default, optional(default)], compile=[default(compile)]}[0m
 [0m[[0m[0mdebug[0m] [0m[0msbt-chain: Checking cache for: dependency: org.scalatest#scalatest_2.12;3.0.4 {test=[default(compile)]}[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to /home/travis/.ivy2/cache[0m
 [0m[[0m[0mdebug[0m] [0m[0msbt-chain: module revision found in cache: org.scalatest#scalatest_2.12;3.0.4[0m
 [0m[[0m[0mdebug[0m] [0m[0m	found org.scalatest#scalatest_2.12;3.0.4 in sbt-chain[0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT->org.scalatest#scalatest_2.12;3.0.4 [test->runtime][0m
@@ -4836,8 +4837,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	resolved ivy file produced in cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m:: downloading artifacts ::[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.8!scala-library.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-effect_2.12;1.0.0!cats-effect_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-core_2.12;1.4.0!cats-core_2.12.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.typelevel#cats-effect_2.12;1.0.0!cats-effect_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-core_2.12;0.10.0!circe-core_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-generic_2.12;0.10.0!circe-generic_2.12.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.circe#circe-parser_2.12;0.10.0!circe-parser_2.12.jar[0m
@@ -4863,7 +4864,7 @@
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.8!scala-compiler.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(bundle)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] jline#jline;2.14.6!jline.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 373ms :: artifacts dl 10ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 362ms :: artifacts dl 8ms[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT compile produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-compile.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT runtime produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-runtime.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT test produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-test.xml[0m
@@ -4877,6 +4878,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT pom produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-pom.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT scala-tool produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-scala-tool.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.flowtick#sysiphos-examples_2.12;0.1.0-SNAPSHOT scoveragePlugin produced in /home/travis/build/flowtick/sysiphos/docs/examples/target/scala-2.12/resolution-cache/reports/com.flowtick-sysiphos-examples_2.12-scoveragePlugin.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	resolve done (373ms resolve - 10ms download)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	resolve done (362ms resolve - 8ms download)[0m
 [0m[[0m[0minfo[0m] [0m[0mDone updating.[0m
 [0m[[0m[33mwarn[0m] [0m[0mThere may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.[0m
