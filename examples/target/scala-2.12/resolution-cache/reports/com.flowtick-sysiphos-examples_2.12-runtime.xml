@@ -7,10 +7,10 @@
 		revision="0.1.0-SNAPSHOT"
 		conf="runtime"
 		confs="compile, runtime, test, provided, optional, aspectj-runner, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, scoveragePlugin"
-		date="20190304121042"/>
+		date="20190304121435"/>
 	<dependencies>
 		<module organisation="com.flowtick" name="sysiphos-core_2.12">
-			<revision name="0.1.0-SNAPSHOT" status="integration" pubdate="20190304121036" resolver="inter-project" artresolver="inter-project" homepage="https://github.com/flowtick/sysiphos" downloaded="false" searched="false" default="false" conf="compile, default(compile)" position="1">
+			<revision name="0.1.0-SNAPSHOT" status="integration" pubdate="20190304121431" resolver="inter-project" artresolver="inter-project" homepage="https://github.com/flowtick/sysiphos" downloaded="false" searched="false" default="false" conf="compile, default(compile)" position="1">
 				<license name="APL2" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="failed" details="" size="0" time="0" searched="false"/>
 				<caller organisation="com.flowtick" name="sysiphos-examples_2.12" conf="compile, runtime" rev="0.1.0-SNAPSHOT" rev-constraint-default="0.1.0-SNAPSHOT" rev-constraint-dynamic="0.1.0-SNAPSHOT" callerrev="0.1.0-SNAPSHOT"/>
