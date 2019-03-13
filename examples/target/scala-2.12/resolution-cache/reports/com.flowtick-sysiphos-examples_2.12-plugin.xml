@@ -4,10 +4,10 @@
 	<info
 		organisation="com.flowtick"
 		module="sysiphos-examples_2.12"
-		revision="0.1.0-SNAPSHOT"
+		revision="bbeec95b0c5094df5e3ba9c3f7c43aee92120f78"
 		conf="plugin"
 		confs="compile, runtime, test, provided, optional, aspectj-runner, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, scoveragePlugin"
-		date="20190304121435"/>
+		date="20190313121117"/>
 	<dependencies>
 		<module organisation="org.scala-lang" name="scala-compiler">
 			<revision name="2.12.8" status="release" pubdate="20181204101719" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="1">
@@ -64,7 +64,7 @@
 			<revision name="2.2.1" status="release" pubdate="20170924235010" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://wartremover.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="0">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="3074" time="0" location="/home/travis/.ivy2/cache/org.wartremover/wartremover_2.12/ivy-2.2.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/wartremover/wartremover_2.12/2.2.1/wartremover_2.12-2.2.1.pom"/>
-				<caller organisation="com.flowtick" name="sysiphos-examples_2.12" conf="plugin" rev="2.2.1" rev-constraint-default="2.2.1" rev-constraint-dynamic="2.2.1" callerrev="0.1.0-SNAPSHOT"/>
+				<caller organisation="com.flowtick" name="sysiphos-examples_2.12" conf="plugin" rev="2.2.1" rev-constraint-default="2.2.1" rev-constraint-dynamic="2.2.1" callerrev="bbeec95b0c5094df5e3ba9c3f7c43aee92120f78"/>
 				<artifacts>
 					<artifact name="wartremover_2.12" type="jar" ext="jar" status="no" details="" size="291572" time="0" location="/home/travis/.ivy2/cache/org.wartremover/wartremover_2.12/jars/wartremover_2.12-2.2.1.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/wartremover/wartremover_2.12/2.2.1/wartremover_2.12-2.2.1.jar"/>

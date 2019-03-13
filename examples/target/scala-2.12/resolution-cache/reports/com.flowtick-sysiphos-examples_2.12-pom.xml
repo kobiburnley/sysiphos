@@ -4,10 +4,10 @@
 	<info
 		organisation="com.flowtick"
 		module="sysiphos-examples_2.12"
-		revision="0.1.0-SNAPSHOT"
+		revision="bbeec95b0c5094df5e3ba9c3f7c43aee92120f78"
 		conf="pom"
 		confs="compile, runtime, test, provided, optional, aspectj-runner, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, scoveragePlugin"
-		date="20190304121435"/>
+		date="20190313121117"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>
