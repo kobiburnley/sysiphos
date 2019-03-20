@@ -2,9 +2,9 @@
 <ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
 	<info organisation="com.flowtick"
 		module="sysiphos-examples_2.12"
-		revision="bbeec95b0c5094df5e3ba9c3f7c43aee92120f78"
+		revision="495b90045043b239053bd20f41b79f7840dc4767"
 		status="integration"
-		publication="20190313121117"
+		publication="20190320142503"
 	>
 		<license name="APL2" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
 		<description homepage="https://github.com/flowtick/sysiphos">
@@ -35,7 +35,7 @@
 	<dependencies>
 		<dependency org="org.scala-lang" name="scala-compiler" rev="2.12.8" conf="scala-tool->default,optional(default)"/>
 		<dependency org="org.scala-lang" name="scala-library" rev="2.12.8" conf="scala-tool->default,optional(default);compile->default(compile)"/>
-		<dependency org="com.flowtick" name="sysiphos-core_2.12" rev="bbeec95b0c5094df5e3ba9c3f7c43aee92120f78" conf="compile->default(compile)"/>
+		<dependency org="com.flowtick" name="sysiphos-core_2.12" rev="495b90045043b239053bd20f41b79f7840dc4767" conf="compile->default(compile)"/>
 		<dependency org="org.aspectj" name="aspectjweaver" rev="1.8.10" conf="aspectj-runner->default(compile)"/>
 		<dependency org="org.wartremover" name="wartremover_2.12" rev="2.2.1" conf="plugin->default(compile)"/>
 		<dependency org="org.scalatest" name="scalatest_2.12" rev="3.0.4" conf="test->default(compile)"/>
