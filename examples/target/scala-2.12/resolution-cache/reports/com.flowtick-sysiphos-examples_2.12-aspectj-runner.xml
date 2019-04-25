@@ -4,16 +4,16 @@
 	<info
 		organisation="com.flowtick"
 		module="sysiphos-examples_2.12"
-		revision="4639f1b7815d30bbc5696c8b98ff4f680ddf8d7b"
+		revision="a61de28f05cd351da564af941f695b5139511150"
 		conf="aspectj-runner"
 		confs="compile, runtime, test, provided, optional, aspectj-runner, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, scoveragePlugin"
-		date="20190425082046"/>
+		date="20190425154620"/>
 	<dependencies>
 		<module organisation="org.aspectj" name="aspectjweaver">
 			<revision name="1.8.10" status="release" pubdate="20161212194903" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.aspectj.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="0">
 				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/legal/epl-v10.html"/>
 				<metadata-artifact status="no" details="" size="2518" time="0" location="/home/travis/.ivy2/cache/org.aspectj/aspectjweaver/ivy-1.8.10.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.pom"/>
-				<caller organisation="com.flowtick" name="sysiphos-examples_2.12" conf="aspectj-runner" rev="1.8.10" rev-constraint-default="1.8.10" rev-constraint-dynamic="1.8.10" callerrev="4639f1b7815d30bbc5696c8b98ff4f680ddf8d7b"/>
+				<caller organisation="com.flowtick" name="sysiphos-examples_2.12" conf="aspectj-runner" rev="1.8.10" rev-constraint-default="1.8.10" rev-constraint-dynamic="1.8.10" callerrev="a61de28f05cd351da564af941f695b5139511150"/>
 				<artifacts>
 					<artifact name="aspectjweaver" type="jar" ext="jar" status="no" details="" size="1929029" time="0" location="/home/travis/.ivy2/cache/org.aspectj/aspectjweaver/jars/aspectjweaver-1.8.10.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar"/>
