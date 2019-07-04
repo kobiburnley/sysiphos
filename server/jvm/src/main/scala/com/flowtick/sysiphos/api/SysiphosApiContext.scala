@@ -151,4 +151,7 @@ class SysiphosApiContext(
   override def version: Future[String] = Future.successful(com.flowtick.sysiphos.BuildInfo.version)
 
   override def healthCheck: Future[Boolean] = Future.successful(true)
+
+  override def name: Future[String] = Future.successful(com.flowtick.sysiphos.BuildInfo.name)
+
 }
