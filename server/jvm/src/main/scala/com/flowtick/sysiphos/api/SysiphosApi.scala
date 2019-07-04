@@ -61,6 +61,9 @@ object SysiphosApi {
     def version: Future[String]
 
     @GraphQLField
+    def healthCheck: Future[Boolean]
+
+    @GraphQLField
     def name: Future[String]
   }
 
