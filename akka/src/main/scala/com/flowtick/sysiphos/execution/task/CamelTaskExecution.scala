@@ -6,6 +6,7 @@ import cats._
 import cats.instances.list._
 import cats.effect.IO
 import com.fasterxml.jackson.databind.{ DeserializationFeature, ObjectMapper }
+import com.flowtick.sysiphos.config.Configuration
 import com.flowtick.sysiphos.execution.{ FlowTaskExecution, Logging }
 import com.flowtick.sysiphos.flow.FlowDefinition.ExtractExpression
 import com.flowtick.sysiphos.flow.FlowInstanceContextValue
@@ -19,8 +20,12 @@ import org.apache.camel.impl.{ DefaultCamelContext, SimpleRegistry }
 import org.apache.camel.jsonpath.JsonPathExpression
 import org.apache.camel.language.simple.SimpleLanguage
 import org.springframework.beans.{ BeanUtils, PropertyAccessorFactory }
+import scala.concurrent.duration._
 
 trait CamelTaskExecution extends FlowTaskExecution with Logging {
+
+  def defaultSocketTimeout: Int = Configuration.propOrEnv("task.http.socket-timeout.default", "600").toInt.seconds.toMillis.toInt
+
 
   lazy val objectMapper: ObjectMapper = {
     val mapper = new ObjectMapper()
@@ -30,6 +35,7 @@ trait CamelTaskExecution extends FlowTaskExecution with Logging {
 
   protected def createCamelContext(camelTask: CamelTask): IO[CamelContext] = IO.delay {
     import scala.collection.JavaConverters._
+    import org.apache.camel.component.http4.HttpComponent
 
     val registry = new SimpleRegistry
     camelTask.registry.getOrElse(Map.empty).foreach {
@@ -45,6 +51,11 @@ trait CamelTaskExecution extends FlowTaskExecution with Logging {
 
     val context = new DefaultCamelContext(registry)
     context.getProperties.put("CamelJacksonTypeConverterToPojo", "true")
+
+    context.getComponent("http4") match {
+      case http4: HttpComponent => http4.setSocketTimeout(defaultSocketTimeout)
+    }
+
     context.disableJMX()
     context
   }

@@ -30,3 +30,4 @@ environment variable and then fallback to default if possible.
 | stats.port | 8125 | Port of the stats server to use for StatsD |
 | task.retries.default | 3 | default number of retries for a task, if not specified otherwise |
 | task.retry.delay.default | 18000 | default number of seconds to wait until next try, if not specified otherwise |
+| task.http.socket-timeout.default | 600 | number of seconds to pass to Camel HTTP4 component as default socket timeout |
