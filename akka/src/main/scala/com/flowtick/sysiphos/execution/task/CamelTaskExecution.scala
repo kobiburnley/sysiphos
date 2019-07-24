@@ -26,7 +26,6 @@ trait CamelTaskExecution extends FlowTaskExecution with Logging {
 
   def defaultSocketTimeout: Int = Configuration.propOrEnv("task.http.socket-timeout.default", "600").toInt.seconds.toMillis.toInt
 
-
   lazy val objectMapper: ObjectMapper = {
     val mapper = new ObjectMapper()
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
